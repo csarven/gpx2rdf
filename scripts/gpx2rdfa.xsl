@@ -38,10 +38,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="http://linked-research.270a.info/media/css/lncs.css" media="all" title="LNCS" />
-        <link rel="stylesheet" href="http://linked-research.270a.info/media/css/lr.css" media="all" />
-        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="http://linked-research.270a.info/scripts/lr.js"></script>
+        <link rel="stylesheet" href="https://dokie.li/media/css/basic.css" media="all" title="Basic" />
+        <link rel="stylesheet" href="https://dokie.li/media/css/do.css" media="all" />
+        <script src="https://dokie.li/scripts/do.js"></script>
         <title></title>
     </head>
 
