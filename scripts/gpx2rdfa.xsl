@@ -24,6 +24,9 @@
     <xsl:variable name="maxLat" select="gpx/metadata/bounds/@maxlat"/>
     <xsl:variable name="maxLon" select="gpx/metadata/bounds/@maxlon"/>
 
+    <xsl:variable name="startDate" select="gpx/trk/trkseg/trkpt[1]/time"/>
+    <xsl:variable name="endDate" select="gpx/trk/trkseg/trkpt[last()]/time"/>
+
     <xsl:variable name="centreLat" select="($minLat + $maxLat) div 2.0"/>
     <xsl:variable name="centreLon" select="($minLon + $maxLon) div 2.0"/>
 
@@ -38,7 +41,7 @@
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <title>Activity at <xsl:value-of select="$metadataBounds"/></title>
+        <title>Activity at <xsl:value-of select="$metadataBounds"/> [<xsl:value-of select="$startDate"/> ~ <xsl:value-of select="$endDate"/>]</title>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="https://dokie.li/media/css/basic.css" rel="stylesheet" media="all" title="Basic" />
         <link href="https://dokie.li/media/css/do.css" media="all" rel="stylesheet" />
@@ -54,7 +57,7 @@
         <main>
             <article about="" typeof="schema:Article">
                 <table id="box-{$metadataBounds}">
-                    <caption>Activity at <a href="http://www.openstreetmap.org/?minlon={$minLon}&amp;minlat={$minLat}&amp;maxlon={$maxLon}&amp;maxlat={$maxLat}"><xsl:value-of select="$metadataBounds"/></a></caption>
+                    <caption>Activity at <a href="http://www.openstreetmap.org/?minlon={$minLon}&amp;minlat={$minLat}&amp;maxlon={$maxLon}&amp;maxlat={$maxLat}"><xsl:value-of select="$metadataBounds"/></a> [<xsl:value-of select="$startDate"/> ~ <xsl:value-of select="$endDate"/>]</caption>
                     <xsl:apply-templates select="gpx/trk/trkseg"/>
                 </table>
 
