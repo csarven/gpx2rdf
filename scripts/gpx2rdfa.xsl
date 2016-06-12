@@ -35,23 +35,24 @@
 <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
 <xsl:text>
 </xsl:text>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="https://dokie.li/media/css/basic.css" media="all" title="Basic" />
-        <link rel="stylesheet" href="https://dokie.li/media/css/do.css" media="all" />
+        <link href="https://dokie.li/media/css/basic.css" rel="stylesheet" media="all" title="Basic" />
+        <link href="https://dokie.li/media/css/do.css" media="all" rel="stylesheet" />
         <script src="https://dokie.li/scripts/do.js"></script>
         <title></title>
     </head>
 
-    <body about="[this:]" typeof="schema:Article sioc:Post prov:Entity as:Activity" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# schema: http://schema.org/ sioc: http://rdfs.org/sioc/ns# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# bibo: http://purl.org/ontology/bibo/ dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: http://www.w3.org/ns/activitystreams# qb: http://purl.org/linked-data/cube# sdmx:http://purl.org/linked-data/sdmx# sdmx-dimension: http://purl.org/linked-data/sdmx/2009/dimension# gi: http://reference.data.gov.uk/id/gregorian-instant/ this: http://example.org/{$metadataBounds}/">
+    <body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: http://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# schema: https://schema.org/ rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# solid: http://www.w3.org/ns/solid/terms# sdmx:http://purl.org/linked-data/sdmx# sdmx-dimension: http://purl.org/linked-data/sdmx/2009/dimension# gi: http://reference.data.gov.uk/id/gregorian-instant/ qudt-quantity: http://qudt.org/vocab/quantity#" typeof="schema:CreativeWork sioc:Post prov:Entity">
+        <main>
+            <article about="" typeof="schema:Article">
+                <table id="box-{$metadataBounds}">
+                    <caption>Activity at <a href="http://www.openstreetmap.org/?minlon={$minLon}&amp;minlat={$minLat}&amp;maxlon={$maxLon}&amp;maxlat={$maxLat}"><xsl:value-of select="$metadataBounds"/></a></caption>
+                    <xsl:apply-templates select="gpx/trk/trkseg"/>
+                </table>
 
-        <table id="box-{$metadataBounds}">
-            <caption>Activity at <a href="http://www.openstreetmap.org/?minlon={$minLon}&amp;minlat={$minLat}&amp;maxlon={$maxLon}&amp;maxlat={$maxLat}"><xsl:value-of select="$metadataBounds"/></a></caption>
-            <xsl:apply-templates select="gpx/trk/trkseg"/>
-        </table>
-
-        <figure id="osm-{$metadataBounds}">
+                <figure id="osm-{$metadataBounds}">
 <!--
             XXX: http://a.tile.openstreetmap.org/{$osmBoundingBox}
             <xsl:variable name="osmBoundingBox">
@@ -66,9 +67,11 @@
  <!-- timbl: http://render.openstreetmap.org/cgi-bin/export?bbox=141.362637,43.052583,141.390454,43.067100&scale=12724&format=svg&layers=C -->
 <!-- http://render.openstreetmap.org/cgi-bin/export?bbox=46.949716111,7.441299664,46.975442100,7.467467798&scale=12724&format=svg&layers=C -->
  <!-- width="640" height="640" -->
-            <object type="image/svg+xml" data="http://render.openstreetmap.org/cgi-bin/export?bbox={$metadataBounds}&amp;scale=100000&amp;format=svg"></object>
-            <figcaption>Activity at  ..</figcaption>
-        </figure>
+                    <object type="image/svg+xml" data="http://render.openstreetmap.org/cgi-bin/export?bbox={$metadataBounds}&amp;scale=100000&amp;format=svg"></object>
+                    <figcaption>Activity at  ..</figcaption>
+                </figure>
+            </article>
+        </main>
     </body>
 </html>
     </xsl:template>
@@ -149,5 +152,4 @@
         </xsl:variable>
         <xsl:value-of select="concat($zoom,'/',$x,'/',$y)"/>
     </xsl:template>
-
 </xsl:stylesheet>
