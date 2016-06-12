@@ -13,7 +13,7 @@
     xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
     xmlns="http://www.w3.org/1999/xhtml"
     xpath-default-namespace="http://www.topografix.com/GPX/1/1"
-    exclude-result-prefixes="xs gpx gpxx gpxtpx"
+    exclude-result-prefixes="xs gpx gpxx gpxtpx math"
     >
     <xsl:output include-content-type="no" method="xhtml" omit-xml-declaration="yes" encoding="utf-8" indent="yes"/>
 
@@ -27,11 +27,15 @@
     <xsl:variable name="startDate" select="gpx/trk/trkseg/trkpt[1]/time"/>
     <xsl:variable name="endDate" select="gpx/trk/trkseg/trkpt[last()]/time"/>
 
+    <xsl:variable name="metadataBounds" select="concat($minLon, ',', $minLat, ',', $maxLon, ',', $maxLat)"/>
+
+    <xsl:variable name="dataset" select="concat($metadataBounds, ',', $startDate, ',', $endDate)"/>
+
     <xsl:variable name="centreLat" select="($minLat + $maxLat) div 2.0"/>
     <xsl:variable name="centreLon" select="($minLon + $maxLon) div 2.0"/>
 
 <!-- tile.osm     <xsl:variable name="metadataBounds" select="concat($minLat, ',', $minLon, ',', $maxLat, ',', $maxLon)"/>
- -->    <xsl:variable name="metadataBounds" select="concat($minLon, ',', $minLat, ',', $maxLon, ',', $maxLat)"/>
+ -->
 
 
     <xsl:template match="/">
@@ -43,7 +47,7 @@
         <meta charset="utf-8" />
         <title>Activity at <xsl:value-of select="$metadataBounds"/> [<xsl:value-of select="$startDate"/> ~ <xsl:value-of select="$endDate"/>]</title>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link href="https://dokie.li/media/css/basic.css" rel="stylesheet" media="all" title="Basic" />
+        <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
         <link href="https://dokie.li/media/css/do.css" media="all" rel="stylesheet" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" rel="stylesheet" />
         <link href="https://dokie.li/media/css/editor.css" media="all" rel="stylesheet" />
@@ -53,15 +57,15 @@
         <script src="https://dokie.li/scripts/do.js"></script>
     </head>
 
-    <body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: http://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# schema: https://schema.org/ rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# solid: http://www.w3.org/ns/solid/terms# sdmx:http://purl.org/linked-data/sdmx# sdmx-dimension: http://purl.org/linked-data/sdmx/2009/dimension# gi: http://reference.data.gov.uk/id/gregorian-instant/ qudt-unit: http://qudt.org/vocab/unit#" typeof="schema:CreativeWork sioc:Post prov:Entity">
+    <body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: http://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: https://schema.org/ rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# solid: http://www.w3.org/ns/solid/terms# sdmx:http://purl.org/linked-data/sdmx# sdmx-dimension: http://purl.org/linked-data/sdmx/2009/dimension# sdmx-measure: http://purl.org/linked-data/sdmx/2009/measure# gi: http://reference.data.gov.uk/id/gregorian-instant/ qudt-unit: http://qudt.org/vocab/unit#" typeof="schema:CreativeWork sioc:Post prov:Entity">
         <main>
             <article about="" typeof="schema:Article">
-                <table id="box-{$metadataBounds}">
+                <table id="box-{$dataset}">
                     <caption>Activity at <a href="http://www.openstreetmap.org/?minlon={$minLon}&amp;minlat={$minLat}&amp;maxlon={$maxLon}&amp;maxlat={$maxLat}"><xsl:value-of select="$metadataBounds"/></a> [<xsl:value-of select="$startDate"/> ~ <xsl:value-of select="$endDate"/>]</caption>
                     <xsl:apply-templates select="gpx/trk/trkseg"/>
                 </table>
 
-                <figure id="osm-{$metadataBounds}">
+                <figure id="osm-{$dataset}">
 <!--
             XXX: http://a.tile.openstreetmap.org/{$osmBoundingBox}
             <xsl:variable name="osmBoundingBox">
@@ -86,15 +90,19 @@
     </xsl:template>
 
     <xsl:template match="gpx/trk/trkseg">
-        <thead>
+        <thead about="structure/{$dataset}" typeof="qb:DataStructureDefinition">
             <tr>
-                <th>Time</th><th>Latitude</th><th>Longitude</th><th>Elevation</th>
+                <th rel="qb:component" resource="component/{$dataset}/dimension/time" typeof="qb:ComponentSpecification"><span property="skos:prefLabel" rel="qb:componentProperty qb:dimension" resource="sdmx-dimension:timePeriod" typeof="qb:DimensionProperty">Time</span></th>
+                <th rel="qb:component" resource="component/{$dataset}/measure/latitude" typeof="qb:ComponentSpecification"><span property="skos:prefLabel" rel="qb:componentProperty qb:measure" resource="wgs:lat" typeof="qb:ComponentProperty qb:MeasureProperty"><span rel="rdfs:subPropertyOf" resource="sdmx-measure:obsValue">Latitude</span></span></th>
+                <th rel="qb:component" resource="component/{$dataset}/measure/longitude" typeof="qb:ComponentSpecification"><span property="skos:prefLabel" rel="qb:componentProperty qb:measure" resource="wgs:lon" typeof="qb:ComponentProperty qb:MeasureProperty"><span rel="rdfs:subPropertyOf" resource="sdmx-measure:obsValue">Longitude</span></span></th>
+                <th rel="qb:component" resource="component/{$dataset}/measure/elevation" typeof="qb:ComponentSpecification"><span property="skos:prefLabel" rel="qb:componentProperty qb:measure" resource="wgs:ele" typeof="qb:ComponentProperty qb:MeasureProperty"><span rel="rdfs:subPropertyOf" resource="sdmx-measure:obsValue">Elevation</span></span></th>
                 <xsl:if test="trkpt[1]/extensions/gpxtpx:TrackPointExtension/gpxtpx:hr">
-                    <th>Heart rate</th>
+                <th rel="qb:component" resource="component/{$dataset}/measure/heart-rate" typeof="qb:ComponentSpecification"><span property="skos:prefLabel" rel="qb:componentProperty qb:measure" resource="qudt-unit:HeartBeatsPerMinute" typeof="qb:ComponentProperty qb:MeasureProperty"><span rel="rdfs:subPropertyOf" resource="sdmx-measure:obsValue">Heart rate</span></span></th>
                 </xsl:if>
             </tr>
         </thead>
         <tfoot>
+            <tr><td colspan="4">Dimensions: <a href="http://purl.org/linked-data/sdmx/2009/dimension#timePeriod">Time</a>, Measures: <a href="http://www.w3.org/2003/01/geo/wgs84_pos#lat">Latitude</a>, <a href="http://www.w3.org/2003/01/geo/wgs84_pos#lon">Longitude</a>, <a href="http://www.w3.org/2003/01/geo/wgs84_pos#ele">Elevation</a>, <a href="http://qudt.org/vocab/unit#HeartBeatsPerMinute">Heart rate</a></td></tr>
             <tr><td colspan="4">Elevation is meters above sea level. Heart rate is beats per minute.</td></tr>
             <tr><td colspan="4">http://www.openstreetmap.org/?minlon=7.441299664&amp;minlat=46.949716111&amp;maxlon=7.467467798&amp;maxlat=46.975442100</td></tr>
         </tfoot>
@@ -112,7 +120,8 @@
 
         <xsl:variable name="timePeriod" select="replace($time, 'Z', '')"/>
 
-        <tr about="{$metadataBounds},{$startDate},{$endDate}/{$time};{$lat},{$lon};{$ele}" typeof="qb:Observation">
+        <tr about="dataset/{$dataset}/{$time};{$lat},{$lon};{$ele}" typeof="qb:Observation">
+            <meta rel="qb:dataSet" resource="dataset/{$dataset}"/>
             <td rel="sdmx-dimension:timePeriod" resource="gi:{$timePeriod}"><xsl:value-of select="$time"/></td>
             <td property="wgs:lat" datatype="xsd:decimal"><xsl:value-of select="$lat"/></td>
             <td property="wgs:lon" datatype="xsd:decimal"><xsl:value-of select="$lon"/></td>
