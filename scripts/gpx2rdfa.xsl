@@ -113,7 +113,7 @@
         <xsl:variable name="timePeriod" select="replace($time, 'Z', '')"/>
 
         <tr about="{$metadataBounds},{$startDate},{$endDate}/{$time};{$lat},{$lon};{$ele}" typeof="qb:Observation">
-            <td rel="sdmx-dimension:timePeriod" resource="http://reference.data.gov.uk/id/gregorian-instant/{$timePeriod}"><xsl:value-of select="$time"/></td>
+            <td rel="sdmx-dimension:timePeriod" resource="gi:{$timePeriod}"><xsl:value-of select="$time"/></td>
             <td property="wgs:lat" datatype="xsd:decimal"><xsl:value-of select="$lat"/></td>
             <td property="wgs:lon" datatype="xsd:decimal"><xsl:value-of select="$lon"/></td>
             <td property="wgs:alt" datatype="xsd:decimal"><xsl:value-of select="$ele"/></td>
